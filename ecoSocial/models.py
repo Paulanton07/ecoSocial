@@ -9,6 +9,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+    workspace_notes = models.TextField(blank=True, default='')  # For persistent workspace notes
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
@@ -41,3 +42,31 @@ class Connection(models.Model):
 
     def __str__(self):
         return f"{self.user_from.username} connected with {self.user_to.username}"
+
+class Message(models.Model):
+    sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
+    recipient = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message from {self.sender.username} to {self.recipient.username} at {self.timestamp}"
+
+class Stock(models.Model):
+    WOOD_TYPES = [
+        ('pallet', 'Pallet'),
+        ('plank', 'Plank'),
+        ('offcut', 'Offcut'),
+        # Add more types as needed
+    ]
+    name = models.CharField(max_length=100)
+    wood_type = models.CharField(max_length=20, choices=WOOD_TYPES)
+    size = models.CharField(max_length=100)
+    quantity = models.PositiveIntegerField()
+    price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    image = models.ImageField(upload_to='stock_images/', null=True, blank=True)
+    description = models.TextField(blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.wood_type}) - {self.quantity} available"

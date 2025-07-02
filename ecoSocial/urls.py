@@ -10,7 +10,9 @@ from ecoSocial import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.home, name='home'),  # Dashboard/homepage
+    path('workspace/', views.workspace, name='workspace'),  # Project planner
+    path('posts/', views.posts, name='posts'),  # Community posts
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
     path('profile/', views.profile, name='profile'),

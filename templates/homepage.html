@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | Wood Recycling Company{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <!-- Hero Banner -->
+        <div class="p-4 mb-4 bg-success text-white rounded">
+            <h1 class="display-5">Welcome to WoodCycle!</h1>
+            <p class="lead">Giving wood a second life. Browse our latest stock, connect with the community, and make a difference.</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <!-- Stock Dashboard -->
+    <div class="col-md-6 mb-4">
+        <h3>Latest Stock</h3>
+        {% if latest_stock %}
+            {% for stock in latest_stock %}
+            <div class="card mb-2">
+                {% if stock.image %}
+                <img src="{{ stock.image.url }}" class="card-img-top" alt="{{ stock.name }}" style="max-height:150px;object-fit:cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ stock.name }} ({{ stock.get_wood_type_display }})</h5>
+                    <p class="card-text">Size: {{ stock.size }}<br>Quantity: {{ stock.quantity }}<br>{% if stock.price %}Price: ${{ stock.price }}<br>{% endif %}{{ stock.description }}</p>
+                    <small class="text-muted">Added: {{ stock.date_added|date:"M d, Y H:i" }}</small>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">No stock available yet.</div>
+        {% endif %}
+    </div>
+    <!-- Announcements -->
+    <div class="col-md-6 mb-4">
+        <h3>Announcements</h3>
+        <!-- TODO: Loop over announcements -->
+        <div class="alert alert-warning">No announcements yet.</div>
+    </div>
+</div>
+<div class="row">
+    <!-- Community Posts -->
+    <div class="col-md-8 mb-4">
+        <h3>Community Posts</h3>
+        <!-- TODO: Loop over posts -->
+        <div class="alert alert-secondary">Community posts will appear here.</div>
+    </div>
+    <!-- Quick Actions & Chat -->
+    <div class="col-md-4 mb-4">
+        <h3>Quick Actions</h3>
+        <button class="btn btn-primary w-100 mb-2">Request Pickup/Delivery</button>
+        <button class="btn btn-outline-secondary w-100 mb-2">Contact Company</button>
+        <h3 class="mt-4">Live Chat</h3>
+        <!-- TODO: Chat widget -->
+        <div class="alert alert-success">Chat feature coming soon.</div>
+    </div>
+</div>
+{% endblock %}

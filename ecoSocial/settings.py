@@ -6,7 +6,7 @@ import dj_database_url
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEBUG = True
+DEBUG = False
 
 DATABASES = {
     "default": {
@@ -83,7 +83,7 @@ STATICFILES_FINDERS = [
 ]
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = "django-insecure-y+tghpo-2a6!u338ptda2--2jwz)@p+o+c30l3mnmp)09r5#**"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-placeholder-key")
 
 TEMPLATES = [
     {
@@ -115,6 +115,7 @@ ROOT_URLCONF = "ecoSocial.urls"
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = "ecoSocial.wsgi.application"
+ASGI_APPLICATION = "ecoSocial.asgi.application"
 
 INSTALLED_APPS = [
     # Django core apps
@@ -131,6 +132,7 @@ INSTALLED_APPS = [
     "webpack_loader",
     "account",
     "social_django",
+    "channels",  # Added for Django Channels
 
     # Pinax apps
     "pinax.templates",
@@ -139,6 +141,12 @@ INSTALLED_APPS = [
     # Project app
     "ecoSocial",
 ]
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 WEBPACK_LOADER = {
     "DEFAULT": {
