@@ -51,6 +51,7 @@
                 <div class="card-body">
                     <h6 class="card-title">Notepad</h6>
                     <form method="post" action="">
+                        {% csrf_token %}
                         <textarea class="form-control form-control-sm" name="notepad" rows="4" placeholder="Quick notes or thoughts...">{{ notepad|default:'' }}</textarea>
                         <button type="submit" name="save_note" class="btn btn-outline-primary btn-sm mt-2 w-100">Save Note</button>
                     </form>
@@ -89,7 +90,7 @@
                     <li class="list-group-item small">Dimensions: <b>{{ results.length }}m x {{ results.width }}m{% if results.height %} x {{ results.height }}m{% endif %}</b></li>
                     <li class="list-group-item small">Wood Type: <b>{{ results.wood_type }}</b></li>
                     <li class="list-group-item small">Required Quantity: <b>{{ results.quantity }}</b></li>
-                    <li class="list-group-item small">Estimated Cost: <b>${{ results.cost }}</b></li>
+                    <li class="list-group-item small">Estimated Cost: <b>R{{ results.cost }}</b></li>
                 </ul>
                 {% else %}
                 <div class="alert alert-info small mb-0">Enter your project details to see calculations here.</div>

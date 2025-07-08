@@ -1,0 +1,18 @@
+# Updated requirements for ecoSocial (as of July 2025)
+# Use this file to pin versions for production or CI environments.
+
+Django==5.2.4
+dj-database-url==3.0.1
+psycopg2-binary  # Version not specified, use latest stable if needed
+pinax-templates  # Version not specified, use latest stable if needed
+django-webpack-loader  # Version not specified, use latest stable if needed
+django-user-accounts  # Version not specified, use latest stable if needed
+pinax-eventlog  # Version not specified, use latest stable if needed
+pinax-webanalytics  # Version not specified, use latest stable if needed
+social-auth-app-django  # Version not specified, use latest stable if needed
+nodeenv  # Version not specified, use latest stable if needed
+Pillow==11.3.0
+numpy==2.3.1
+pandas==2.3.1
+scikit-learn==1.7.0
+scipy==1.16.0

@@ -24,7 +24,7 @@
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ stock.name }} ({{ stock.get_wood_type_display }})</h5>
-                    <p class="card-text">Size: {{ stock.size }}<br>Quantity: {{ stock.quantity }}<br>{% if stock.price %}Price: ${{ stock.price }}<br>{% endif %}{{ stock.description }}</p>
+                    <p class="card-text">Size: {{ stock.size }}<br>Quantity: {{ stock.quantity }}<br>{% if stock.price %}Price: R{{ stock.price }}<br>{% endif %}{{ stock.description }}</p>
                     <small class="text-muted">Added: {{ stock.date_added|date:"M d, Y H:i" }}</small>
                 </div>
             </div>
